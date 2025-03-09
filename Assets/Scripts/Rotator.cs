@@ -2,7 +2,6 @@
 using System.Collections;
 
 public class Rotator : MonoBehaviour {
-
 	// Before rendering each frame..
 	void Update () 
 	{
