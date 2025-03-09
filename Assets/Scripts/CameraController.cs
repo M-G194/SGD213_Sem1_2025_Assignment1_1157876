@@ -1,7 +1,8 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class CameraController : MonoBehaviour {
+public class CameraController : MonoBehaviour
+{
 	// store a public reference to the Player game object, so we can refer to it's Transform
 	public GameObject player;
 	// Store a Vector3 offset from the player (a distance to place the camera from the player at all times)
