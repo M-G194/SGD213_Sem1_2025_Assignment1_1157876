@@ -1,53 +1,64 @@
 ﻿using UnityEngine;
-
-// Include the namespace required to use Unity UI
+using System.Collections;
 using UnityEngine.UI;
 
-using System.Collections;
-
 public class PlayerController : MonoBehaviour {
-
-    // Create public variables for player speed, and for the Text UI game objects
-    [SerializeField]
-    public float f_horPlayAccel;
-
+	// References to the text UI elements
 	public Text NumTotal;
-	public Text wintext;
+	public Text WinText;
 
-	// Create private references to the rigidbody component on the player, and the count of pick up objects picked up so far
+	// Reference to the rigidbody component of the player
 	private Rigidbody rb;
-	private float inttotalcount;
-
-	// At the start of the game..
-	void Start ()	{rb = GetComponent<Rigidbody>();inttotalcount = 0;SetCountText ();wintext.text = "";}
-
-	void FixedUpdate ()
-	{
-		// Set some local float variables equal to the value of our Horizontal and Vertical Inputs
-		float moveHorizontal = Input.GetAxis ("Horizontal");
-		float moveVertical = Input.GetAxis ("Vertical");
-		// Create a Vector3 variable, and assign X and Z to feature our horizontal and vertical float variables above
-		Vector3 movement = new Vector3 (moveHorizontal, 0.0f, moveVertical);
-		rb.AddForce (movement * f_horPlayAccel);
-	}
-	void OnTriggerEnter(Collider other) 
-{
-if (other.gameObject.CompareTag ("Pick Up"))
-{							other.gameObject.SetActive (false);
-							inttotalcount = inttotalcount + 1;
-							SetCountText ();
-		}}
-
-    void DoSomething()
-	{
 	
+    // Player speed
+    public float Speed;
+
+	// Count of pick up objects collected so far
+	private float scoreCount;
+
+	// When the player loads into the scene...
+	void Start ()
+	{
+		rb = GetComponent<Rigidbody>();
+		scoreCount = 0;
+		SetCountText();
+		WinText.text = "";
 	}
-    void SetCountText()
-{NumTotal.text = "Count: " + inttotalcount.ToString ();
-		if (inttotalcount >= 12) 
-{
-			// Set the text value of our 'winText'
-			wintext.text = "You Win!";
-}
-}
+
+	// Every physics tick...
+	void FixedUpdate()
+	{
+		// Get the player's input
+		// (Could be optimized further. If we use the new Input System Unity package instead,
+		// we could run this only when a new input is detected with OnMove())
+		float moveHorizontal = Input.GetAxis("Horizontal");
+		float moveVertical = Input.GetAxis("Vertical");
+
+		// Create a Vector3 for movement using the player's inputs
+		Vector3 movement = new Vector3 (moveHorizontal, 0.0f, moveVertical);
+		// Apply the movement
+		rb.AddForce(movement * Speed);
+	}
+
+	// When we trigger another object's box collider...
+	void OnTriggerEnter(Collider other) 
+	{
+		if (other.gameObject.CompareTag("Pick Up"))
+		{
+			other.gameObject.SetActive(false);
+			scoreCount = scoreCount + 1;
+			SetCountText();
+		}
+	}
+	
+	// Update the score counter in the UI
+	void SetCountText()
+	{
+		NumTotal.text = "Count: " + scoreCount.ToString();
+		// If all pick ups were collected (update this number to match the # of pick ups)
+		if (scoreCount >= 12) 
+		{
+			WinText.text = "You Win!";
+		}
+	}
 }

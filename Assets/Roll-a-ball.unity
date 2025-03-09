@@ -235,9 +235,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6565ea6141ea34a6f8b1b7ec81398f64, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  f_horPlayAccel: 5
   NumTotal: {fileID: 2023482906}
-  wintext: {fileID: 893736720}
+  WinText: {fileID: 893736720}
+  Speed: 5
 --- !u!54 &7703438
 Rigidbody:
   m_ObjectHideFlags: 0
