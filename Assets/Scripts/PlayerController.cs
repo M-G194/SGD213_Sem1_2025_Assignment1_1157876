@@ -6,7 +6,7 @@ public class PlayerController : MonoBehaviour
 {
 	// References to the text UI elements
 	public Text NumTotal;
-	public Text WinText;
+	public Image WinImage;
 
 	// Reference to the rigidbody component of the player
 	private Rigidbody rb;
@@ -23,7 +23,7 @@ public class PlayerController : MonoBehaviour
 		rb = GetComponent<Rigidbody>();
 		scoreCount = 0;
 		SetCountText();
-		WinText.text = "";
+		WinImage.enabled = false;
 	}
 
 	// Every physics tick...
@@ -59,7 +59,7 @@ public class PlayerController : MonoBehaviour
 		// If all pick ups were collected (update this number to match the # of pick ups)
 		if (scoreCount >= 12) 
 		{
-			WinText.text = "You Win!";
+			WinImage.enabled = true;
 		}
 	}
 }
