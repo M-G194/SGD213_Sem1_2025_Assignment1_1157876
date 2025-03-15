@@ -3,4 +3,5 @@
 # Push A Cube
 The clean-up and refactoring project of a client's Roll-a-Ball Unity project.
 
-This was made in Unity 2022.1.21f1.
+# Setup
+To use this project, clone the repository and open it in [Unity](https://unity.com/), ideally version 2022.1.21f1 or later.
